@@ -70,7 +70,9 @@ export type CallbackQueueObject = {
 export interface MSALBasic {
     data: DataObject,
     signIn: () => void,
+    authenticatePopup: () => void,
     signOut: () => Promise<any> | void,
+    logoutPopup: () => Promise<any> | void,
     isAuthenticated: () => boolean,
     acquireToken: (request: Request, retries: number) => Promise<AuthResponse | boolean>,
     msGraph: (endpoints:  GraphEndpoints, batchUrl: string | undefined) => Promise<object>,
