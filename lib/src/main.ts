@@ -110,11 +110,23 @@ export class MSAL implements MSALBasic {
             this.lib.loginRedirect(this.request);
         }
     }
+    authenticatePopup() {
+        if (!this.lib.isCallback(window.location.hash) && !this.lib.getAccount()) {
+            // request can be used for login or token request, however in more complex situations this can have diverging options
+            this.lib.loginPopup(this.request);
+        }
+    }
     async signOut() {
         if (this.options.auth.beforeSignOut) {
             await this.options.auth.beforeSignOut(this);
         }
         this.lib.logout();
+    }
+    async logoutPopup() {
+        if (this.options.auth.beforeSignOut) {
+            await this.options.auth.beforeSignOut(this);
+        }
+        this.lib.logoutPopup();
     }
     isAuthenticated() {
         return !this.lib.isCallback(window.location.hash) && !!this.lib.getAccount();
