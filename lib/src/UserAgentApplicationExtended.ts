@@ -1,4 +1,4 @@
-import {Configuration, UserAgentApplication} from "msal";
+import {Configuration, UserAgentApplication } from "msal";
 
 export class UserAgentApplicationExtended extends UserAgentApplication {
     public store = {};

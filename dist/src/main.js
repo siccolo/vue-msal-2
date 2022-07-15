@@ -189,7 +189,7 @@ var MSAL = /** @class */ (function () {
                         _a.sent();
                         _a.label = 2;
                     case 2:
-                        this.lib.logoutPopup();
+                        this.lib.PublicClientApplication.logoutPopup();
                         return [2 /*return*/];
                 }
             });

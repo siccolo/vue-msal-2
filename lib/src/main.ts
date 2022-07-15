@@ -126,7 +126,7 @@ export class MSAL implements MSALBasic {
         if (this.options.auth.beforeSignOut) {
             await this.options.auth.beforeSignOut(this);
         }
-        this.lib.logoutPopup();
+        this.lib.PublicClientApplication.logoutPopup();
     }
     isAuthenticated() {
         return !this.lib.isCallback(window.location.hash) && !!this.lib.getAccount();
