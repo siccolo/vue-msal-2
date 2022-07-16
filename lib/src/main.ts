@@ -1,6 +1,7 @@
 import _ from "lodash";
 import {default as axios, Method} from "axios";
 import {UserAgentApplicationExtended} from "./UserAgentApplicationExtended";
+import * as msal from "@azure/msal-browser";
 import {
     Auth,
     Request,
@@ -19,6 +20,7 @@ import {
 
 export class MSAL implements MSALBasic {
     private lib: any;
+    private msalPublicClientApplication: msal.PublicClientApplication | null = null;
     private tokenExpirationTimers: {[key: string]: undefined | number} = {};
     public data: DataObject = {
         isAuthenticated: false,
@@ -114,6 +116,12 @@ export class MSAL implements MSALBasic {
         if (!this.lib.isCallback(window.location.hash) && !this.lib.getAccount()) {
             // request can be used for login or token request, however in more complex situations this can have diverging options
             this.lib.loginPopup(this.request);
+        }
+    }
+    async authenticatePopupAsync() {
+        if (!this.lib.isCallback(window.location.hash) && !this.lib.getAccount()) {
+            // request can be used for login or token request, however in more complex situations this can have diverging options
+            return await this.lib.loginPopup(this.request);
         }
     }
     async signOut() {

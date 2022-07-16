@@ -67,6 +67,7 @@ var MSAL = /** @class */ (function () {
     function MSAL(options) {
         var _this = this;
         this.options = options;
+        this.msalPublicClientApplication = null;
         this.tokenExpirationTimers = {};
         this.data = {
             isAuthenticated: false,
@@ -160,6 +161,21 @@ var MSAL = /** @class */ (function () {
             // request can be used for login or token request, however in more complex situations this can have diverging options
             this.lib.loginPopup(this.request);
         }
+    };
+    MSAL.prototype.authenticatePopupAsync = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        if (!(!this.lib.isCallback(window.location.hash) && !this.lib.getAccount())) return [3 /*break*/, 2];
+                        return [4 /*yield*/, this.lib.loginPopup(this.request)];
+                    case 1: 
+                    // request can be used for login or token request, however in more complex situations this can have diverging options
+                    return [2 /*return*/, _a.sent()];
+                    case 2: return [2 /*return*/];
+                }
+            });
+        });
     };
     MSAL.prototype.signOut = function () {
         return __awaiter(this, void 0, void 0, function () {

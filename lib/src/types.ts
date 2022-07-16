@@ -71,6 +71,7 @@ export interface MSALBasic {
     data: DataObject,
     signIn: () => void,
     authenticatePopup: () => void,
+    authenticatePopupAsync: () => Promise<any> | void,
     signOut: () => Promise<any> | void,
     logoutPopup: () => Promise<any> | void,
     isAuthenticated: () => boolean,
